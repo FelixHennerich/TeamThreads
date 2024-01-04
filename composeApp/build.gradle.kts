@@ -5,13 +5,14 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
@@ -25,13 +26,31 @@ kotlin {
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
-            isStatic = true
+            export("dev.icerock.moko:resources:0.23.0")
+            export("dev.icerock.moko:graphics:0.9.0")
         }
     }
     
     sourceSets {
         val desktopMain by getting
-        
+        val commonMain by getting {
+            dependencies {
+                api(libs.resources)
+                implementation(libs.mvvm.core)
+                implementation(libs.mvvm.compose)
+                implementation(libs.mvvm.flow)
+                implementation(libs.mvvm.flow.compose)
+            }
+        }
+        val iosX64Main by getting {
+            resources.srcDirs("build/generated/moko/iosX64Main/src")
+        }
+        val iosArm64Main by getting {
+            resources.srcDirs("build/generated/moko/iosArm64Main/src")
+        }
+        val iosSimulatorArm64Main by getting {
+            resources.srcDirs("build/generated/moko/iosSimulatorArm64Main/src")
+        }
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
@@ -76,11 +95,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
+    }
+    sourceSets {
+        getByName("main").java.srcDirs("build/generated/moko/androidMain/src")
     }
 }
 
@@ -94,4 +116,9 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "de.teamthread.kmm_sharingresources"
+    multiplatformResourcesClassName = "SharedRes"
 }
