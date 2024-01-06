@@ -1,4 +1,4 @@
-package data
+package data.local
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,7 +7,9 @@ actual class DataStorageManager(
     private val context: Context
 ) {
 
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("TeamThreads", Context.MODE_PRIVATE)
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("TeamThreads",
+        Context.MODE_PRIVATE
+    )
 
 
     /**

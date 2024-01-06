@@ -1,14 +1,13 @@
-package data
+package data.local
 
-import platform.Foundation.NSUserDefaults
+import java.util.prefs.Preferences
 
-actual class DataStorageManager {
-
-    private val userDefaults = NSUserDefaults.standardUserDefaults
-
+actual class DataStorageManager(
+    private val preferences: Preferences = Preferences.userRoot().node("TeamThreads")
+) {
 
     /**
-     * Save String on the local device storage
+     * Save String in the local device storage
      *
      * @param key -> What should be saved?
      * @param value -> This value will be assigned
@@ -16,9 +15,7 @@ actual class DataStorageManager {
      * @sample value = "test@test.de"
      */
     actual fun saveString(key: String, value: String) {
-        userDefaults.setObject(value, forKey = key)
-        userDefaults.synchronize()
-
+        preferences.put(key, value)
     }
 
     /**
@@ -30,16 +27,11 @@ actual class DataStorageManager {
      * @sample value = "test@test.de"
      */
     actual fun readString(key: String): String? {
-        val storedValue = userDefaults.objectForKey(key)
-        return if(storedValue.toString() == "null"){
-            null
-        }else {
-            storedValue.toString()
-        }
+        return preferences.get(key, null)
     }
 
     /**
-     * Save Int on the local device storage
+     * Save Int in the local device storage
      *
      * @param key -> What should be saved?
      * @param value -> This value will be assigned
@@ -47,9 +39,7 @@ actual class DataStorageManager {
      * @sample value = "23"
      */
     actual fun saveInt(key: String, value: Long) {
-        userDefaults.setInteger(value, forKey = key)
-        userDefaults.synchronize()
-
+        preferences.putLong(key, value)
     }
 
     /**
@@ -61,17 +51,16 @@ actual class DataStorageManager {
      * @sample value = "23"
      */
     actual fun readInt(key: String, defaultValue: Int): Int {
-        return userDefaults.integerForKey(key).toInt()
+        return preferences.getLong(key, defaultValue.toLong()).toInt()
     }
 
     /**
      * Delete Value from local data storage
      *
-     *  @param key -> What sould be deleted?
-     *  @sample key = "email"
+     * @param key -> What should be deleted?
+     * @sample key = "email"
      */
     actual fun deleteEntry(key: String) {
-        userDefaults.removeObjectForKey(key)
-        userDefaults.synchronize()
+        preferences.remove(key)
     }
 }

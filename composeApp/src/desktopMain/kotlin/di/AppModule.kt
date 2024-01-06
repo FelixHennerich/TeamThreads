@@ -1,6 +1,6 @@
 package di
 
-import data.DataStorageManager
+import data.local.DataStorageManager
 import java.util.prefs.Preferences
 
 actual class AppModule {
