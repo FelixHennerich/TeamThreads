@@ -40,6 +40,7 @@ kotlin {
                 implementation(libs.mvvm.compose)
                 implementation(libs.mvvm.flow)
                 implementation(libs.mvvm.flow.compose)
+                implementation(libs.ktor.client.core)
             }
         }
         val iosX64Main by getting {

@@ -1,6 +1,6 @@
 package event
 
-import data.DataStorageManager
+import data.local.DataStorageManager
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

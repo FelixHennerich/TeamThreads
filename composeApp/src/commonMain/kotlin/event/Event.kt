@@ -1,6 +1,6 @@
 package event
 
-import data.DataStorageManager
+import data.local.DataStorageManager
 import kotlinx.coroutines.flow.MutableStateFlow
 
 interface Event {

@@ -1,6 +1,6 @@
 package di
 
-import data.DataStorageManager
+import data.local.DataStorageManager
 
 expect class AppModule {
     val localDataSource: DataStorageManager

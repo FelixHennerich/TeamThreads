@@ -1,7 +1,7 @@
 package di
 
 import android.content.Context
-import data.DataStorageManager
+import data.local.DataStorageManager
 
 actual class AppModule(
     private val context: Context

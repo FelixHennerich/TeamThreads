@@ -1,4 +1,4 @@
-package data
+package data.local
 
 expect class DataStorageManager {
 
