@@ -18,6 +18,7 @@ import event.ThreadViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import presentation.view.RegisterScreen
 import utils.CommonLogger
 
 /**
@@ -28,7 +29,7 @@ fun App(
     appModule: AppModule
 ) {
     // Screen Managing
-    var currentScreen by remember { mutableStateOf<Screen>(Screen.Loading) }
+    var currentScreen by remember { mutableStateOf<Screen>(Screen.Register) }
 
     //state managing
     val viewModel = getViewModel(
@@ -45,16 +46,6 @@ fun App(
     /**
      * TESTS
      */
-    Text("Abcd")
-
-    Text(
-        state.testvalue,
-        modifier = Modifier.padding(100.dp)
-    )
-    GlobalScope.launch {
-        delay(10000)
-        viewModel.onEvent(ThreadEvent.TestEvent)
-    }
 
     val commonLogger = CommonLogger()
 
@@ -73,9 +64,15 @@ fun App(
      */
 
     //Decide the Screen that is shown
-    /*when(currentScreen){
-        is Screen.Loading ->
-    }*/
+    when(currentScreen){
+        is Screen.Register -> RegisterScreen().RegisterScreen(
+            state = state,
+            onEvent = viewModel::onEvent,
+            localDataManager = appModule.localDataSource
+        )
+
+        else -> {}
+    }
 }
 
 
@@ -86,4 +83,5 @@ fun App(
  */
 sealed class Screen {
     data object Loading: Screen()
+    data object Register: Screen()
 }
