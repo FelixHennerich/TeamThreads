@@ -21,6 +21,7 @@ mvvmFlow = "0.16.1"
 mvvmCompose = "0.16.1"
 mvvmCore = "0.16.1"
 resources = "0.23.0"
+tinkAndroid = "1.7.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -47,6 +48,7 @@ mvvm-flow = { module = "dev.icerock.moko:mvvm-flow", version.ref = "mvvmFlow" }
 mvvm-compose = { module = "dev.icerock.moko:mvvm-compose", version.ref = "mvvmCompose" }
 mvvm-core = { module = "dev.icerock.moko:mvvm-core", version.ref = "mvvmCore" }
 resources = { module = "dev.icerock.moko:resources", version.ref = "resources" }
+tink-android = { module = "com.google.crypto.tink:tink-android", version.ref = "tinkAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

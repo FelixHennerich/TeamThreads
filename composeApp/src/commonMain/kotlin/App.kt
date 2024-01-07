@@ -20,6 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import presentation.view.RegisterScreen
 import utils.CommonLogger
+import utils.CryptoManager
 
 /**
  * Main function which is called on every device
@@ -48,6 +49,7 @@ fun App(
      */
 
     val commonLogger = CommonLogger()
+
 
     val resTfulManager = RESTfulManager()
     val keylist = listOf<String>("uuid", "name", "age")

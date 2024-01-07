@@ -3,6 +3,7 @@ package account.creation
 import account.User
 import account.utils.UUID
 import data.external.RESTfulManager
+import utils.CryptoManager
 import utils.DateUtil
 import utils.exception.TException
 
@@ -24,12 +25,14 @@ class AccountCreationManager {
         if(!birhtdayChecker(birthday)){
             return TException.BirthdayWrong106
         }
+        //Current date of the signup
         val currentDate = DateUtil().getCurrentDate()
+        //UUID of user
         val uuid = UUID().generate128BitUUID()
+        //Teamrank
         val role = "Team"
-        val encryptedPassword = password
-        //Password encryption here
-        //UUID Generation here
+        //Password encryption here TODO ACUTALY ENCRYPTION NOT WORKING
+        val encryptedPassword = CryptoManager().encryptString(password, "KStASz3oK2zGLE")
         //Company code exist
 
         try{
