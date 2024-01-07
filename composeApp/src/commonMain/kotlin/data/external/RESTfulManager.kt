@@ -1,6 +1,7 @@
 package data.external
 
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.statement.bodyAsText
@@ -8,9 +9,10 @@ import io.ktor.client.statement.bodyAsText
 class RESTfulManager: RESTfulAPI {
 
     override val client: HttpClient = HttpClient()
-    override val url: String = "https://felix.henneri.ch/php/TeamThreads/usermanager.php"
-    val url1: String = "https://felix.henneri.ch/php/TeamThreads/editOrCreateEntryWithKeys.php"
-    val url2: String = "https://felix.henneri.ch/php/TeamThreads/doesEntryExist.php"
+    override val url: String = "https://felix.henneri.ch/php/TeamThreads/"
+    private val url1: String = url + "getEntryByKey.php"
+    private val url2: String = url + "editOrCreateEntryWithKeys.php"
+    private val url3: String = url + "doesEntryExist.php"
 
     /**
      * Get an entry of the database sorted by a specific key
@@ -20,7 +22,7 @@ class RESTfulManager: RESTfulAPI {
      * @return Entry of the Database
      */
     override suspend fun getEntryByKey(key: String, value: String): String {
-        val response = client.get(url){
+        val response = client.get(url1){
             url {
                 parameters.append(key, value)
             }
@@ -35,7 +37,7 @@ class RESTfulManager: RESTfulAPI {
      * @param values -> keys itself
      */
     override suspend fun editOrCreateEntryWithKeys(keys: List<String>, values: List<String>) {
-        client.post(url1){
+        client.post(url2){
             url {
                 for (i in 1..keys.size) {
                     parameters.append(keys[i-1], values[i-1])
@@ -52,7 +54,7 @@ class RESTfulManager: RESTfulAPI {
      * @return Entry of the Database
      */
     override suspend fun doesEntryExist(key: String, value: String): Boolean {
-        val response = client.get(url2){
+        val response = client.get(url3){
             url {
                 parameters.append(key, value)
             }

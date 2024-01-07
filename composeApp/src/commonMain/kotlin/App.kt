@@ -1,3 +1,4 @@
+import account.data.mapUserString
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -59,9 +60,12 @@ fun App(
 
     val resTfulManager = RESTfulManager()
     val keylist = listOf<String>("uuid", "name", "age")
-    val valuelist = listOf<String>("48237434234328", "felix Hennerich", "12")
+    val valuelist = listOf<String>("23423434","felix Hennerich", "12")
     GlobalScope.launch {
-        commonLogger.log(resTfulManager.doesEntryExist("uuid", "2223").toString())
+        //resTfulManager.editOrCreateEntryWithKeys(keylist, valuelist)
+
+
+        commonLogger.log(mapUserString(resTfulManager.getEntryByKey("uuid", "23423434")).toString())
     }
 
     /**
