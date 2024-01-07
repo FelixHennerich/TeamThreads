@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import data.external.RESTfulManager
 import dev.icerock.moko.mvvm.compose.getViewModel
 import dev.icerock.moko.mvvm.compose.viewModelFactory
 import di.AppModule
@@ -39,6 +40,10 @@ fun App(
     )
     val state by viewModel.state.collectAsState()
 
+
+    /**
+     * TESTS
+     */
     Text("Abcd")
 
     Text(
@@ -49,6 +54,18 @@ fun App(
         delay(10000)
         viewModel.onEvent(ThreadEvent.TestEvent)
     }
+
+
+    val resTfulManager = RESTfulManager()
+    val keylist = listOf<String>("uuid", "name", "age")
+    val valuelist = listOf<String>("48237434234328", "felix Hennerich", "12")
+    GlobalScope.launch {
+        resTfulManager.editOrCreateEntryWithKeys(keylist, valuelist)
+    }
+
+    /**
+     *
+     */
 
     //Decide the Screen that is shown
     /*when(currentScreen){

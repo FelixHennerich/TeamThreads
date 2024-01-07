@@ -52,9 +52,16 @@ kotlin {
         val iosSimulatorArm64Main by getting {
             resources.srcDirs("build/generated/moko/iosSimulatorArm64Main/src")
         }
+        val iosMain by creating {
+            dependencies{
+                implementation(libs.ktor.client.darwin)
+            }
+        }
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.android)
+            implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
