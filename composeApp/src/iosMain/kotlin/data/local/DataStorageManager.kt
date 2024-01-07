@@ -1,5 +1,7 @@
 package data.local
 
+import platform.Foundation.NSUserDefaults
+
 actual class DataStorageManager {
 
     private val userDefaults = NSUserDefaults.standardUserDefaults
