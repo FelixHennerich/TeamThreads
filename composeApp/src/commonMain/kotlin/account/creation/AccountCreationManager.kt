@@ -1,9 +1,48 @@
 package account.creation
 
+import account.User
+import account.utils.UUID
+import data.external.RESTfulManager
+import utils.DateUtil
+import utils.exception.TException
+
 class AccountCreationManager {
 
-    fun createAccount(email: String, password: String, name: String, birthday: String) {
+    suspend fun createAccount(email: String, password: String, name: String, birthday: String, companycode: String): TException {
+        if(!charChecker(email) || !charChecker(password) || !charChecker(name)){
+            return TException.UnallowedCharacters105
+        }
+        if(!checkEmail(email)){
+            return TException.Emailwrong100
+        }
+        if(password.length < 8){
+            return TException.PasswordToWeak101
+        }
+        if(name.length < 3 || name.length > 32){
+            return TException.UsernameLength102
+        }
+        if(!birhtdayChecker(birthday)){
+            return TException.BirthdayWrong106
+        }
+        val currentDate = DateUtil().getCurrentDate()
+        val uuid = UUID().generate128BitUUID()
+        val role = "Team"
+        val encryptedPassword = password
+        //Password encryption here
+        //UUID Generation here
+        //Company code exist
 
+        try{
+            //listOf("uuid", "email", "password", "name", "role", "birthday", "signup", "companycode")
+            val entrylist = listOf(uuid, email, encryptedPassword, name, role, birthday, currentDate, companycode)
+
+            //actual creation
+            RESTfulManager().editOrCreateEntryWithKeys(User().keylist,entrylist)
+            return TException.SUCCESS001
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+        return TException.DatabaseCreation401
     }
 
     /**

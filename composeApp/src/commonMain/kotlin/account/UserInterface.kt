@@ -10,4 +10,5 @@ interface UserInterface {
     suspend fun getBirthday(user: User): String
     suspend fun getSignup(user: User): String
     suspend fun getRole(user: User): String
+    suspend fun getCompanyCode(user: User): String
 }

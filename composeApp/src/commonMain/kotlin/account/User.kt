@@ -10,9 +10,10 @@ class User: UserInterface {
         val role: String,
         val birthday: String,
         val signup: String,
+        val companycode: String
     )
 
-    val keylist = listOf("uuid", "email", "password", "name", "role", "birthday", "signup")
+    val keylist = listOf("uuid", "email", "password", "name", "role", "birthday", "signup", "companycode")
 
     override suspend fun getUser(uuid: String): account.User {
         TODO("Not yet implemented")
@@ -43,6 +44,10 @@ class User: UserInterface {
     }
 
     override suspend fun getRole(user: account.User): String {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getCompanyCode(user: account.User): String {
         TODO("Not yet implemented")
     }
 }

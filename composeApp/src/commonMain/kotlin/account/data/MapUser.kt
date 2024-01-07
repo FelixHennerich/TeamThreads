@@ -27,6 +27,7 @@ fun mapUsertoUser(user: HashMap<String, String>): User.User {
         user["name"]!!,
         user["role"]!!,
         user["birthday"]!!,
-        user["signup"]!!
+        user["signup"]!!,
+        user["companycode"]!!
     )
 }
