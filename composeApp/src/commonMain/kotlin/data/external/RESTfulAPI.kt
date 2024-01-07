@@ -10,4 +10,6 @@ interface RESTfulAPI {
     suspend fun getEntryByKey(key: String, value: String): String
 
     suspend fun editOrCreateEntryWithKeys(keys: List<String>, values: List<String>)
+
+    suspend fun doesEntryExist(key: String, value: String): Boolean
 }
