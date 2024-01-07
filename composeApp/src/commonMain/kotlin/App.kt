@@ -55,12 +55,13 @@ fun App(
         viewModel.onEvent(ThreadEvent.TestEvent)
     }
 
+    val commonLogger = CommonLogger()
 
     val resTfulManager = RESTfulManager()
     val keylist = listOf<String>("uuid", "name", "age")
     val valuelist = listOf<String>("48237434234328", "felix Hennerich", "12")
     GlobalScope.launch {
-        resTfulManager.editOrCreateEntryWithKeys(keylist, valuelist)
+        commonLogger.log(resTfulManager.doesEntryExist("uuid", "2223").toString())
     }
 
     /**
