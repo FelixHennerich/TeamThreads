@@ -2,6 +2,7 @@ package account.creation
 
 import account.User
 import account.utils.UUID
+import data.external.APIType
 import data.external.RESTfulManager
 import utils.CryptoManager
 import utils.DateUtil
@@ -40,7 +41,7 @@ class AccountCreationManager {
             val entrylist = listOf(uuid, email, encryptedPassword, name, role, birthday, currentDate, companycode)
 
             //actual creation
-            RESTfulManager().editOrCreateEntryWithKeys(User().keylist,entrylist)
+            RESTfulManager().editOrCreateEntryWithKeys(User().keylist,entrylist, APIType.USER)
             return TException.SUCCESS001
         }catch (e: Exception){
             e.printStackTrace()
