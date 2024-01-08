@@ -1,3 +1,4 @@
+import account.User
 import account.data.mapUserString
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
@@ -9,6 +10,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import company.Company
+import data.external.APIType
 import data.external.RESTfulManager
 import dev.icerock.moko.mvvm.compose.getViewModel
 import dev.icerock.moko.mvvm.compose.viewModelFactory
@@ -55,10 +58,8 @@ fun App(
     val keylist = listOf<String>("uuid", "name", "age")
     val valuelist = listOf<String>("23423434","felix Hennerich", "12")
     GlobalScope.launch {
-        //resTfulManager.editOrCreateEntryWithKeys(keylist, valuelist)
-
-
-        commonLogger.log(mapUserString(resTfulManager.getEntryByKey("uuid", "23423434")).toString())
+        val company = Company("ufeu893474huef")
+        company.createCompany(User.User(uuid = "Thisistheuuid", email = "", password = "", name = "thisismyname", "", "", "",""),"Companyname")
     }
 
     /**

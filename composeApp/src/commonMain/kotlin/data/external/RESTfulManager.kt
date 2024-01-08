@@ -5,14 +5,12 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.statement.bodyAsText
+import utils.CommonLogger
 
 class RESTfulManager: RESTfulAPI {
 
     override val client: HttpClient = HttpClient()
-    override val url: String = "https://felix.henneri.ch/php/TeamThreads/"
-    private val url1: String = url + "getEntryByKey.php"
-    private val url2: String = url + "editOrCreateEntryWithKeys.php"
-    private val url3: String = url + "doesEntryExist.php"
+
 
     /**
      * Get an entry of the database sorted by a specific key
@@ -21,8 +19,8 @@ class RESTfulManager: RESTfulAPI {
      * @param value -> key itself
      * @return Entry of the Database
      */
-    override suspend fun getEntryByKey(key: String, value: String): String {
-        val response = client.get(url1){
+    override suspend fun getEntryByKey(key: String, value: String, apitype: APIType): String {
+        val response = client.get(RESTfulLinks().getEntryByKeyLink(apitype)){
             url {
                 parameters.append(key, value)
             }
@@ -36,14 +34,16 @@ class RESTfulManager: RESTfulAPI {
      * @param keys -> name of the keys
      * @param values -> keys itself
      */
-    override suspend fun editOrCreateEntryWithKeys(keys: List<String>, values: List<String>) {
-        client.post(url2){
+    override suspend fun editOrCreateEntryWithKeys(keys: List<String>, values: List<String>, apitype: APIType) {
+        val response = client.post(RESTfulLinks().editOrCreateEntryWithKeys(apitype)){
             url {
                 for (i in 1..keys.size) {
                     parameters.append(keys[i-1], values[i-1])
                 }
             }
         }
+        val commonLogger = CommonLogger()
+        commonLogger.log(response.bodyAsText())
     }
 
     /**
@@ -53,8 +53,8 @@ class RESTfulManager: RESTfulAPI {
      * @param value -> key itself
      * @return Entry of the Database
      */
-    override suspend fun doesEntryExist(key: String, value: String): Boolean {
-        val response = client.get(url3){
+    override suspend fun doesEntryExist(key: String, value: String, apitype: APIType): Boolean {
+        val response = client.get(RESTfulLinks().doesEntryExist(apitype)){
             url {
                 parameters.append(key, value)
             }
