@@ -2,13 +2,13 @@ package account
 
 interface UserInterface {
 
-    suspend fun getUser(uuid: String): User
-    suspend fun getUUID(name: String): String
-    suspend fun getEmail(user: User): String
-    suspend fun getPassword(user: User): String
-    suspend fun getName(user: User): String
-    suspend fun getBirthday(user: User): String
-    suspend fun getSignup(user: User): String
-    suspend fun getRole(user: User): String
-    suspend fun getCompanyCode(user: User): String
+    suspend fun getUser(uuid: String): User.User
+    suspend fun getUserByName(name: String): User.User
+    suspend fun getEmail(user: User.User): String
+    suspend fun getPassword(user: User.User): String
+    suspend fun getName(user: User.User): String
+    suspend fun getBirthday(user: User.User): String
+    suspend fun getSignup(user: User.User): String
+    suspend fun getRole(user: User.User): String
+    suspend fun getCompanyCode(user: User.User): String
 }

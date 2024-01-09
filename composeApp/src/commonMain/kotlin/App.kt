@@ -1,4 +1,5 @@
 import account.User
+import account.creation.AccountCreationManager
 import account.data.mapUserString
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
@@ -58,8 +59,11 @@ fun App(
     val keylist = listOf<String>("uuid", "name", "age")
     val valuelist = listOf<String>("23423434","felix Hennerich", "12")
     GlobalScope.launch {
-        val company = Company("ufeu893474huef")
-        company.createCompany(User.User(uuid = "Thisistheuuid", email = "", password = "", name = "thisismyname", "", "", "",""),"Companyname")
+        //val company = Company("ufeu893474huef")
+        //company.createCompany(User.User(uuid = "Thisistheuuid", email = "", password = "", name = "thisismyname", "", "", "",""),"Companyname")
+
+        //val acc = AccountCreationManager()
+        //acc.createAccount("fehennerich@outlook.de", "12345678", "Felix", "01.04.2005", "TeamThreads")
     }
 
     /**
