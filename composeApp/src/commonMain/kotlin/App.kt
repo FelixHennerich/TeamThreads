@@ -25,6 +25,7 @@ import kotlinx.coroutines.launch
 import presentation.view.RegisterScreen
 import utils.CommonLogger
 import utils.CryptoManager
+import utils.exception.ExceptionHandler
 
 /**
  * Main function which is called on every device
@@ -53,17 +54,18 @@ fun App(
      */
 
     val commonLogger = CommonLogger()
+    val fetcher = ExceptionHandler()
+    val acc = AccountCreationManager()
+    val company = Company("ufeu893474huef")
 
 
     val resTfulManager = RESTfulManager()
     val keylist = listOf<String>("uuid", "name", "age")
     val valuelist = listOf<String>("23423434","felix Hennerich", "12")
     GlobalScope.launch {
-        //val company = Company("ufeu893474huef")
         //company.createCompany(User.User(uuid = "Thisistheuuid", email = "", password = "", name = "thisismyname", "", "", "",""),"Companyname")
 
-        //val acc = AccountCreationManager()
-        //acc.createAccount("fehennerich@outlook.de", "12345678", "Felix", "01.04.2005", "TeamThreads")
+        //commonLogger.log(fetcher.fetchErrorMessage(acc.createAccount("fehennerich@outloo.de", "12345678", "Felixx", "01.04.2005", "TeamThreads")))
     }
 
     /**

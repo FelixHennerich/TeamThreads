@@ -10,22 +10,26 @@ import utils.exception.TException
 
 class AccountCreationManager {
 
+    val resTfulManager = RESTfulManager()
+
     suspend fun createAccount(email: String, password: String, name: String, birthday: String, companycode: String): TException {
-        if(!charChecker(email) || !charChecker(password) || !charChecker(name)){
+        if(!charChecker(email) || !charChecker(password) || !charChecker(name))
             return TException.UnallowedCharacters105
-        }
-        if(!checkEmail(email)){
+        if(!checkEmail(email))
             return TException.Emailwrong100
-        }
-        if(password.length < 8){
+        if(password.length < 8)
             return TException.PasswordToWeak101
-        }
-        if(name.length < 3 || name.length > 32){
+        if(name.length < 3 || name.length > 32)
             return TException.UsernameLength102
-        }
-        if(!birhtdayChecker(birthday)){
+        if(!birhtdayChecker(birthday))
             return TException.BirthdayWrong106
-        }
+        if(!isCompanyCodeExist(companycode))
+            return TException.CompanyCodeWrong108
+        if(!isEmailAvailable(email))
+            return TException.EmailExists104
+        if(!isNameAvailable(name))
+            return TException.UsernameExists103
+
         //Current date of the signup
         val currentDate = DateUtil().getCurrentDate()
         //UUID of user
@@ -34,7 +38,8 @@ class AccountCreationManager {
         val role = "Team"
         //Password encryption here TODO ACUTALY ENCRYPTION NOT WORKING
         val encryptedPassword = CryptoManager().encryptString(password, "KStASz3oK2zGLE")
-        //Company code exist
+
+
 
         try{
             //listOf("uuid", "email", "password", "name", "role", "birthday", "signup", "companycode")
@@ -47,6 +52,37 @@ class AccountCreationManager {
             e.printStackTrace()
         }
         return TException.DatabaseCreation401
+    }
+
+    /**
+     * Check if the Email is available
+     *
+     * @param email -> Email
+     * @return Boolean true = is usable false = isnt
+     */
+    suspend fun isEmailAvailable(email: String): Boolean{
+        return !resTfulManager.doesEntryExist("email", email, APIType.USER)
+    }
+
+    /**
+     * Check if the name is available
+     *
+     * @param name -> Name
+     * @return Boolean true = is usable false = isnt
+     */
+    suspend fun isNameAvailable(name: String): Boolean{
+        return !resTfulManager.doesEntryExist("name", name, APIType.USER)
+    }
+
+    /**
+     * Check if the code is real
+     *
+     * @param code -> Company join code
+     * @return Boolean true = exist false = doesnt
+     */
+    fun isCompanyCodeExist(code: String): Boolean {
+
+        return true
     }
 
     /**

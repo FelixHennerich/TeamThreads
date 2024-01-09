@@ -48,6 +48,7 @@ class ExceptionHandler {
             TException.UnallowedCharacters105 -> message = "There is a character that isnt allowed"
             TException.BirthdayWrong106 -> message = "Enter your birthday like that: dd.mm.yyyy"
             TException.WrongPassword107 -> message = "You've entered a wrong password"
+            TException.CompanyCodeWrong108 -> message = "You've entered a wrong Company-Code"
             /**
              * 200
              */
