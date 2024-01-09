@@ -9,7 +9,7 @@ class Company(override val companyid: String) : CompanyInterface {
         val resTfulManager = RESTfulManager()
 
         val keylist = listOf<String>("name", "id", "ownername", "owneruuid")
-        val valuelist = listOf<String>(companyname, companyid, "testid", "testowner")
+        val valuelist = listOf<String>(companyname, companyid, owner.name, owner.uuid)
 
         resTfulManager.editOrCreateEntryWithKeys(keylist, valuelist, APIType.COMPANY)
     }

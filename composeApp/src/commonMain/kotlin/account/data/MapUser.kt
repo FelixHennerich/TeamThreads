@@ -1,6 +1,7 @@
 package account.data
 
 import account.User
+import utils.CommonLogger
 
 
 fun mapUserString(user: String): Map<String, String>{
@@ -19,15 +20,15 @@ fun mapUserString(user: String): Map<String, String>{
     return dataMap
 }
 
-fun mapUsertoUser(user: HashMap<String, String>): User.User {
+fun mapUsertoUser(user: Map<String, String>): User.User {
     return User.User(
-        user["uuid"]!!,
-        user["email"]!!,
-        user["password"]!!,
-        user["name"]!!,
-        user["role"]!!,
-        user["birthday"]!!,
-        user["signup"]!!,
-        user["companycode"]!!
+        user["Uuid"]!!,
+        user["Email"]!!,
+        user["Password"]!!,
+        user["Name"]!!,
+        user["Role"]!!,
+        user["Birthday"]!!,
+        user["Signup"]!!,
+        user["Companycode"]!!
     )
 }
