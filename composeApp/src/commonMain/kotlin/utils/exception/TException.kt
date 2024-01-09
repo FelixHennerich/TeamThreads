@@ -16,6 +16,7 @@ enum class TException {
     UnallowedCharacters105,
     BirthdayWrong106,
     WrongPassword107,
+    CompanyCodeWrong108,
 
     LogoutError120,
     LogoutWorked121,
