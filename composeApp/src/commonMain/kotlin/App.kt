@@ -29,6 +29,8 @@ import utils.exception.ExceptionHandler
 
 /**
  * Main function which is called on every device
+ *
+ * @param appModule -> AppModule for viewmodel
  */
 @Composable
 fun App(

@@ -4,6 +4,12 @@ import account.User
 import utils.CommonLogger
 
 
+/**
+ * Mapping the user string that is provided by the RESTfulAPI to a Map
+ *
+ * @param user -> string from database
+ * @return Map of user data
+ */
 fun mapUserString(user: String): Map<String, String>{
     val trimmedString = user.trim('#')
 
@@ -20,6 +26,12 @@ fun mapUserString(user: String): Map<String, String>{
     return dataMap
 }
 
+/**
+ * Map userstring from the function before to the actual User
+ *
+ * @param user -> Map from function before
+ * @return User data class with data
+ */
 fun mapUsertoUser(user: Map<String, String>): User.User {
     return User.User(
         user["Uuid"]!!,

@@ -10,6 +10,12 @@ class RESTfulLinks {
     private val url5: String = url + "editOrCreateEntryWithKeysCompany.php"
     private val url6: String = url + "doesEntryExistCompany.php"
 
+    /**
+     * Get link for RESTfulAPI Request
+     *
+     * @param apiType -> User/Company etc..
+     * @return Link
+     */
     fun getEntryByKeyLink(apiType: APIType): String {
         return when(apiType){
             APIType.USER -> url1
@@ -20,6 +26,12 @@ class RESTfulLinks {
         }
     }
 
+    /**
+     * Get link for RESTfulAPI Request
+     *
+     * @param apiType -> User/Company etc..
+     * @return Link
+     */
     fun editOrCreateEntryWithKeys(apiType: APIType): String {
         return when(apiType){
             APIType.USER -> url2
@@ -30,6 +42,12 @@ class RESTfulLinks {
         }
     }
 
+    /**
+     * Get link for RESTfulAPI Request
+     *
+     * @param apiType -> User/Company etc..
+     * @return Link
+     */
     fun doesEntryExist(apiType: APIType): String {
         return when(apiType){
             APIType.USER -> url3
