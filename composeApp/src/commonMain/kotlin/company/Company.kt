@@ -5,6 +5,7 @@ import data.external.APIType
 import data.external.RESTfulManager
 
 class Company(override val companyid: String) : CompanyInterface {
+
     override suspend fun createCompany(owner: User.User, companyname: String) {
         val resTfulManager = RESTfulManager()
 

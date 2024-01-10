@@ -15,6 +15,11 @@ class ThreadViewModel(
     val state = _state.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), ThreadState())
 
 
+    /**
+     * Called on every event
+     *
+     * @param event -> Eventtype
+     */
     fun onEvent(event: ThreadEvent){
         when(event){
             is ThreadEvent.TestEvent -> {

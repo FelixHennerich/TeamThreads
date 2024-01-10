@@ -17,6 +17,7 @@ class RESTfulManager: RESTfulAPI {
      *
      * @param key -> name of the key
      * @param value -> key itself
+     * @param apitype -> APIType (User, Company..)
      * @return Entry of the Database
      */
     override suspend fun getEntryByKey(key: String, value: String, apitype: APIType): String {
@@ -33,6 +34,7 @@ class RESTfulManager: RESTfulAPI {
      *
      * @param keys -> name of the keys
      * @param values -> keys itself
+     * @param apitype -> APIType (User, Company..)
      */
     override suspend fun editOrCreateEntryWithKeys(keys: List<String>, values: List<String>, apitype: APIType) {
         val response = client.post(RESTfulLinks().editOrCreateEntryWithKeys(apitype)){
@@ -51,6 +53,7 @@ class RESTfulManager: RESTfulAPI {
      *
      * @param key -> name of the key
      * @param value -> key itself
+     * @param apitype -> APIType (User, Company..)
      * @return Entry of the Database
      */
     override suspend fun doesEntryExist(key: String, value: String, apitype: APIType): Boolean {
