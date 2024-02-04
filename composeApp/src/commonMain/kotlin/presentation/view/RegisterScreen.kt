@@ -1,5 +1,6 @@
 package presentation.view
 
+import account.creation.AccountCreationManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -54,6 +55,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import presentation.color.Colors
 import presentation.color.fromEnum
+import utils.exception.ExceptionHandler
+import utils.exception.TException
 
 class RegisterScreen {
 
@@ -406,7 +409,19 @@ class RegisterScreen {
     }
 
     @OptIn(ExperimentalComposeUiApi::class)
-    fun submit() {
-
+    fun submit(email: String, password: String , name: String, birthday: String, companycode: String, onEvent: (ThreadEvent) -> Unit) {
+        GlobalScope.launch {
+            val acc = AccountCreationManager()
+            val response = acc.createAccount(
+                email = email,
+                birthday = birthday,
+                name = name,
+                companycode = companycode,
+                password = password,
+                )
+            if(response != TException.SUCCESS001){
+                onEvent(ThreadEvent.RegisterErrorMessageUpdate(ExceptionHandler().fetchErrorMessage(response)))
+            }
+        }
     }
 }
