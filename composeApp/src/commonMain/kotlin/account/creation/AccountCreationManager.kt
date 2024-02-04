@@ -60,7 +60,7 @@ class AccountCreationManager {
      * @param email -> Email
      * @return Boolean true = is usable false = isnt
      */
-    suspend fun isEmailAvailable(email: String): Boolean{
+    private suspend fun isEmailAvailable(email: String): Boolean{
         return !resTfulManager.doesEntryExist("email", email, APIType.USER)
     }
 
@@ -70,7 +70,7 @@ class AccountCreationManager {
      * @param name -> Name
      * @return Boolean true = is usable false = isnt
      */
-    suspend fun isNameAvailable(name: String): Boolean{
+    private suspend fun isNameAvailable(name: String): Boolean{
         return !resTfulManager.doesEntryExist("name", name, APIType.USER)
     }
 
@@ -80,7 +80,7 @@ class AccountCreationManager {
      * @param code -> Company join code
      * @return Boolean true = exist false = doesnt
      */
-    fun isCompanyCodeExist(code: String): Boolean {
+    private fun isCompanyCodeExist(code: String): Boolean {
 
         return true
     }
@@ -91,7 +91,7 @@ class AccountCreationManager {
      * @param email -> Email to Check
      * @return -> Contains = true; Not = false
      */
-    fun checkEmail(email: String): Boolean{
+    private fun checkEmail(email: String): Boolean{
         val emailRegex = Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$")
         if(emailRegex.matches(email)) {
             return true
@@ -105,7 +105,7 @@ class AccountCreationManager {
      * @param birthday -> Birthday to check
      * @return true or false
      */
-    fun birhtdayChecker(birthday: String): Boolean{
+    private fun birhtdayChecker(birthday: String): Boolean{
         val regex = Regex("\\d{2}.\\d{2}.\\d{4}")
         if(regex.matches(birthday)){
             return true
@@ -119,7 +119,7 @@ class AccountCreationManager {
      * @param value -> String that has to be checked
      * @return -> true = string is ok, false = string isnt ok
      */
-    fun charChecker(value: String): Boolean{
+    private fun charChecker(value: String): Boolean{
         val acceptedCharset = mutableListOf("a","b","c","d","e","f","g","'",">","@","~",
             "h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","€","ü",
             "y","z","1","2","3","4","5","6","7","8","9","0","!","§","$","%","&","ä","ö",

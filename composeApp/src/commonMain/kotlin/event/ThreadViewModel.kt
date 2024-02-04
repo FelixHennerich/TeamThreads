@@ -27,6 +27,11 @@ class ThreadViewModel(
                     testvalue = "Edited"
                 ) }
             }
+            is ThreadEvent.RegisterErrorMessageUpdate -> {
+                _state.update { it.copy(
+                    RegisterErrorMessage = event.message
+                ) }
+            }
         }
     }
 }
